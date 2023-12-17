@@ -10,17 +10,27 @@ image_paths = ['12cm.jpg', '24cm.jpg', '36cm.jpg']
 for index, distance in enumerate(distances):
 
     img = cv2.imread(image_paths[index])
-
+    
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
-    # cv2.resizeWindow('Image', 2800, 2600)
+    cv2.resizeWindow('Image', 600, 800)
     cv2.imshow('Image', img)
     cv2.waitKey(0)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('Image', 600, 800)
+    cv2.imshow('Image', gray)
+    cv2.waitKey(0)
 
     _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    img_with_contours = img.copy()
+    cv2.drawContours(img_with_contours, contours, -1, (0, 255, 0), 3)
+    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('Image', 600, 800)
+    cv2.imshow('Image', img_with_contours)
+    cv2.waitKey(0)
 
     contour = contours[0]
 
