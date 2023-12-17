@@ -32,9 +32,15 @@ for index, distance in enumerate(distances):
     cv2.imshow('Image', img_with_contours)
     cv2.waitKey(0)
 
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)
     contour = contours[0]
-
     x, y, w, h = cv2.boundingRect(contour)
+    cv2.rectangle(img_with_contours, (x, y), (x + w, y + h), (0, 0, 255), 2)
+    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('Image', 600, 800)
+    cv2.imshow('Image', img_with_contours)
+    cv2.waitKey(0)
+
     image_dimensions.append({'width': w, 'height': h})
 
 scale_factors = [{'width': d / dim['width'], 'height': d / dim['height']} for d, dim in zip(distances, image_dimensions)]
