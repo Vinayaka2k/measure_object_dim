@@ -45,17 +45,18 @@ for index, distance in enumerate(distances):
 
 # print(image_dimensions)
 scale_factors = [{'width': d / dim['width'], 'height': d / dim['height']} for d, dim in zip(distances, image_dimensions)]
-print(scale_factors)
-# avg_scale_factors = {
-#     'width': sum(sf['width'] for sf in scale_factors) / len(scale_factors),
-#     'height': sum(sf['height'] for sf in scale_factors) / len(scale_factors)
-# }
+# print(scale_factors)
+avg_scale_factors = {
+    'width': sum(sf['width'] for sf in scale_factors) / len(scale_factors),
+    'height': sum(sf['height'] for sf in scale_factors) / len(scale_factors)
+}
+# print(avg_scale_factors)
 
-# actual_dimensions = {
-#     'width': avg_scale_factors['width'] * image_dimensions[0]['width'],
-#     'height': avg_scale_factors['height'] * image_dimensions[0]['height']
-# }
+actual_dimensions = {
+    'width': avg_scale_factors['width'] * image_dimensions[-1]['width'],
+    'height': avg_scale_factors['height'] * image_dimensions[-1]['height']
+}
 
-# print("Actual Dimensions:", actual_dimensions)
+print("Actual Dimensions:", actual_dimensions)
 
 cv2.destroyAllWindows()
