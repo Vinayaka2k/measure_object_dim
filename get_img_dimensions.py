@@ -5,7 +5,7 @@ import numpy as np
 distances = [12, 24, 36]
 
 image_dimensions = []
-image_paths = ['12cm.jpg', '24cm.jpg', '36cm.jpg']
+image_paths = ['images/12cm.jpg', 'images/24cm.jpg', 'images/36cm.jpg']
 
 for index, distance in enumerate(distances):
 
@@ -35,7 +35,7 @@ for index, distance in enumerate(distances):
     contours = sorted(contours, key=cv2.contourArea, reverse=True)
     contour = contours[0]
     x, y, w, h = cv2.boundingRect(contour)
-    cv2.rectangle(img_with_contours, (x, y), (x + w, y + h), (0, 0, 255), 2)
+    cv2.rectangle(img_with_contours, (x, y), (x + w, y + h), (0, 0, 255), 4)
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Image', 600, 800)
     cv2.imshow('Image', img_with_contours)
@@ -43,18 +43,19 @@ for index, distance in enumerate(distances):
 
     image_dimensions.append({'width': w, 'height': h})
 
+# print(image_dimensions)
 scale_factors = [{'width': d / dim['width'], 'height': d / dim['height']} for d, dim in zip(distances, image_dimensions)]
+print(scale_factors)
+# avg_scale_factors = {
+#     'width': sum(sf['width'] for sf in scale_factors) / len(scale_factors),
+#     'height': sum(sf['height'] for sf in scale_factors) / len(scale_factors)
+# }
 
-avg_scale_factors = {
-    'width': sum(sf['width'] for sf in scale_factors) / len(scale_factors),
-    'height': sum(sf['height'] for sf in scale_factors) / len(scale_factors)
-}
+# actual_dimensions = {
+#     'width': avg_scale_factors['width'] * image_dimensions[0]['width'],
+#     'height': avg_scale_factors['height'] * image_dimensions[0]['height']
+# }
 
-actual_dimensions = {
-    'width': avg_scale_factors['width'] * image_dimensions[0]['width'],
-    'height': avg_scale_factors['height'] * image_dimensions[0]['height']
-}
-
-print("Actual Dimensions:", actual_dimensions)
+# print("Actual Dimensions:", actual_dimensions)
 
 cv2.destroyAllWindows()
