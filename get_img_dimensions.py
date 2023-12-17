@@ -13,14 +13,14 @@ for index, distance in enumerate(distances):
     
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Image', 600, 800)
-    cv2.imshow('Image', img)
-    cv2.waitKey(0)
+    # cv2.imshow('Image', img)
+    # cv2.waitKey(0)
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Image', 600, 800)
-    cv2.imshow('Image', gray)
-    cv2.waitKey(0)
+    # cv2.imshow('Image', gray)
+    # cv2.waitKey(0)
 
     _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 
@@ -29,8 +29,8 @@ for index, distance in enumerate(distances):
     cv2.drawContours(img_with_contours, contours, -1, (0, 255, 0), 3)
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Image', 600, 800)
-    cv2.imshow('Image', img_with_contours)
-    cv2.waitKey(0)
+    # cv2.imshow('Image', img_with_contours)
+    # cv2.waitKey(0)
 
     contours = sorted(contours, key=cv2.contourArea, reverse=True)
     contour = contours[0]
@@ -38,8 +38,8 @@ for index, distance in enumerate(distances):
     cv2.rectangle(img_with_contours, (x, y), (x + w, y + h), (0, 0, 255), 4)
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Image', 600, 800)
-    cv2.imshow('Image', img_with_contours)
-    cv2.waitKey(0)
+    # cv2.imshow('Image', img_with_contours)
+    # cv2.waitKey(0)
 
     image_dimensions.append({'width': w, 'height': h})
 
